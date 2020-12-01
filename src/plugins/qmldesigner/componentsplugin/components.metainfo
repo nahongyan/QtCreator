@@ -1,0 +1,86 @@
+MetaInfo {
+    Type {
+        name: "QtQuick.Layouts.RowLayout"
+        icon: ":/componentsplugin/images/row-layouts-icon-16px.png"
+
+        ItemLibraryEntry {
+            name: "Row Layout"
+            category: "Qt Quick - Layouts"
+            libraryIcon: ":/componentsplugin/images/row-layouts-icon.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Layouts"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+        }
+    }
+
+    Type {
+        name: "QtQuick.Layouts.ColumnLayout"
+        icon: ":/componentsplugin/images/column-layouts-icon-16px.png"
+
+        ItemLibraryEntry {
+            name: "Column Layout"
+            category: "Qt Quick - Layouts"
+            libraryIcon: ":/componentsplugin/images/column-layouts-icon.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Layouts"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+        }
+    }
+
+    Type {
+        name: "QtQuick.Layouts.GridLayout"
+        icon: ":/componentsplugin/images/grid-layouts-icon-16px.png"
+
+        ItemLibraryEntry {
+            name: "Grid Layout"
+            category: "Qt Quick - Layouts"
+            libraryIcon: ":/componentsplugin/images/grid-layouts-icon.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Layouts"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+        }
+    }
+
+    Type {
+        name: "QtQuick.Controls.SplitView"
+        icon: ":/componentsplugin/images/splitview-layouts-icon-16px.png"
+
+        ItemLibraryEntry {
+            name: "SplitView"
+            category: "Qt Quick - Layouts"
+            libraryIcon: ":/componentsplugin/images/splitview-layouts-icon.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Controls"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+        }
+    }
+
+    Type {
+        name: "QtQuick.Layouts.StackLayout"
+        icon: ":/componentsplugin/images/stack-layouts-icon-16px.png"
+
+        Hints {
+            isStackedContainer: true
+            indexPropertyForStackedContainer: "currentIndex"
+        }
+
+        ItemLibraryEntry {
+            name: "StackLayout"
+            category: "Qt Quick - Layouts"
+            libraryIcon: ":/componentsplugin/images/stack-layouts-icon.png"
+            version: "1.3"
+            requiredImport: "QtQuick.Layouts"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+        }
+    }
+}

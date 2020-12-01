@@ -1,0 +1,14 @@
+Label {
+    text: "%1"
+    tooltip: "%1"
+}
+
+SecondColumnLayout {
+    LineEdit {
+        backendValue: backendValues.%2
+        Layout.fillWidth: true
+    }
+
+    ExpandingSpacer {
+    }
+}

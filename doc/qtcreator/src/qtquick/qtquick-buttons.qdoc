@@ -1,0 +1,280 @@
+/****************************************************************************
+**
+** Copyright (C) 2020 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the Qt Creator documentation.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+**
+****************************************************************************/
+
+// **********************************************************************
+// NOTE: the sections are not ordered by their logical order to avoid
+// reshuffling the file each time the index order changes (i.e., often).
+// Run the fixnavi.pl script to adjust the links to the index order.
+// **********************************************************************
+
+/*!
+    \previouspage qtquick-form-editor.html
+    \page quick-buttons.html
+    \nextpage quick-scalable-image.html
+
+    \title Creating Buttons
+
+    To create a button type:
+
+    \list 1
+
+        \li Select \uicontrol File > \uicontrol {New File or Project} >
+            \if defined(qtcreator)
+            \uicontrol Qt > \uicontrol {QML File (Qt Quick 2)} >
+            \else
+            \uicontrol {Qt Quick Files} > \uicontrol {Qt Quick File} >
+            \endif
+            \uicontrol Choose to create a QML file called Button.qml (for
+            example).
+
+            \note Types are listed in the \uicontrol Library only if the
+            filename begins with a capital letter.
+
+        \li Click \uicontrol {Design} to edit the file in the
+            \uicontrol {Form Editor}.
+
+        \li In the \uicontrol Navigator, select \uicontrol Item and set the
+            width (\uicontrol W) and height (\uicontrol H) of the button in the
+            \uicontrol Properties view.
+
+        \li Drag and drop a \uicontrol Rectangle from the \uicontrol Library to
+            the item in \uicontrol Navigator. This creates a nested item where
+            the item is the parent of the rectangle. Items are positioned
+            relative to their parents.
+
+        \li In the \uicontrol Properties view, modify the appearance of the
+            rectangle:
+
+        \list a
+
+            \li In the \uicontrol Color field, select the button color.
+
+            \li In the \uicontrol Radius field, set the radius of
+                the rectangle to produce rounded corners for the button.
+
+            \li Select \uicontrol {Layout}, and then select the
+                \inlineimage anchor-fill.png
+                (\uicontrol {Fill to Parent}) button to anchor the rectangle to
+                the item.
+
+
+        \endlist
+
+        \li Drag and drop a \uicontrol {Text} type to the item in
+            \uicontrol Navigator.
+
+        \li In the \uicontrol Properties view, edit the properties of the \uicontrol Text
+            type.
+
+        \list a
+
+            \li In the \uicontrol Text field, enter \e Button.
+
+                You can select the text color in the \uicontrol {Text color} field and the
+                font, size, and style in the
+                \uicontrol Font section.
+
+            \li In the \uicontrol Alignment field, select the center buttons to align
+                the text to the center of the button.
+
+            \li Select \uicontrol Layout > \uicontrol {Fill to Parent}
+                to anchor the text to the whole button area.
+
+        \endlist
+
+        \li Press \key {Ctrl+S} to save the button.
+
+            \image qmldesigner-button.png "Button component"
+
+    \endlist
+
+    To be useful, the button type has to be created in a project.
+    When you work on other QML files in the project to create screens
+    or other components for the UI, the button type appears in the
+    \uicontrol {My QML Components} tab of the \uicontrol Library view.
+    You can use it to create button instances and modify their properties
+    to assign them useful IDs, change their appearance, and set the button
+    text for each button instance, for example.
+
+    To create a graphical button that scales beautifully without using vector
+    graphics, use the \l [QML]{BorderImage}{Border Image} type. For more
+    information, see \l{Creating Scalable Buttons and Borders}.
+    */
+
+
+/*!
+    \previouspage quick-buttons.html
+    \page quick-scalable-image.html
+    \nextpage qtquick-navigator.html
+
+    \title Creating Scalable Buttons and Borders
+
+    You can use the \l [QML]{BorderImage}{Border Image} type to display an
+    image, such as a PNG file, as a border and a background.
+
+    Use two border images and suitable graphics to change the appearance of
+    a button when it is clicked. You can use use \l{Adding States}{states}
+    to determine which image is visible depending on whether the mouse
+    button is pressed down. You could add more images and states to
+    change the appearance of the button depending on other mouse events,
+    such as hovered.
+
+    Add a \l [QML]{MouseArea}{Mouse Area} type that covers the whole area and
+    reacts to mouse events.
+
+    You can use states also to change the button text color and font size. For
+    example, you can scale the button text up or down.
+
+    \image qmldesigner-borderimage-type.png "Button type in Form Editor and States"
+
+    \section1 Creating the Button Type
+
+    To create a button type, select \uicontrol File >
+    \uicontrol {New File or Project} >
+    \if defined(qtcreator)
+    \uicontrol Qt > \uicontrol {QML File (Qt Quick 2)} >
+    \else
+    \uicontrol {Qt Quick Files} > \uicontrol {Qt Quick File} >
+    \endif
+    \uicontrol Choose to create a QML file called Button.qml (for example).
+
+    \note Types are listed in the \uicontrol Library only if the
+    filename begins with a capital letter.
+
+    \section1 Constructing the Button Component
+
+    To construct the button component:
+
+    \list 1
+        \li Click \uicontrol {Design} to edit the QML file in the
+            \uicontrol {Form Editor}.
+        \li In the \uicontrol {Assets} tab of \uicontrol Library, select
+            \uicontrol {Add New Assets} to copy the image files you want
+            to use to the project folder.
+        \li In the \uicontrol Navigator, select the root item and set the
+            width (\uicontrol W) and height (\uicontrol H) of the button in the
+            \uicontrol Properties view to match the size of the images
+            you plan to use. This specifies the initial size of the button
+            component.
+        \li Drag and drop two \uicontrol {Border Image} types from
+            \uicontrol Library to the root item in \uicontrol Navigator.
+        \li Drag and drop a \uicontrol Text type to the root item.
+        \li Drag and drop a \uicontrol {Mouse Area} to the root item in
+            \uicontrol Navigator.
+        \li Select a border image to edit the values of its properties:
+            \list a
+                \li In the \uicontrol Id field, enter an ID for the border
+                    image. In this example, we use the ID \e inactiveButton.
+                \li In the \uicontrol Source field, select the image file for
+                    the border image. For example, inactive_button.png.
+                \li In the \uicontrol {Layout} tab, select the
+                    \inlineimage anchor-fill.png
+                    (\uicontrol {Fill to Parent}) button to always make the
+                    image the same size as its parent. This makes the button
+                    component scalable, because the image size is bound to the
+                    component size.
+            \endlist
+        \li Select the other border image to edit the values of its properties
+            similarly:
+            \list a
+                \li In the \uicontrol Id field, enter \e activeButton.
+                \li In the \uicontrol Source field, select the image file
+                    for the button when it is clicked. For example,
+                    active_button.png.
+                \li In the \uicontrol {Layout} tab, select the
+                    \inlineimage anchor-fill.png
+                    (\uicontrol {Fill to Parent}) button.
+            \endlist
+        \li Select the text item to specify font size and color in
+            \uicontrol Properties:
+            \list a
+                \li In the \uicontrol Color field, use
+                    the color picker to select the font color, or enter a value
+                    in the field.
+                \li In \uicontrol Font group, \uicontrol Size field, enter the
+                    font size.
+                \li In the \uicontrol {Layout} tab, select
+                    \inlineimage anchor-vertical-center.png
+                    (\uicontrol {Vertical Center}) and
+                    \inlineimage anchor-horizontal-center.png
+                    (\uicontrol {Horizontal Center}) buttons to inherit the
+                    vertical and horizontal centering from the parent.
+                    This ensures that the button label is centered when the
+                    component is resized.
+            \endlist
+    \endlist
+
+    \section1 Using States to Change Component Property Values
+
+    \list 1
+        \li In the \uicontrol States view, select \uicontrol {Create New State}
+            twice to create two new states.
+            \image qmldesigner-borderimage-states.png "Active and inactive states"
+        \li Select \uicontrol State1.
+        \li Change the state name to \e active.
+        \li Select \inlineimage icons/action-icon.png
+            , and then select \uicontrol {Set when Condition} to determine
+            when the state should be applied.
+        \li In the \uicontrol {Binding Editor}, select the \c mouseArea
+            type and the \c pressed signal to specify that the state is
+            applied when the mouse button is pressed down.
+            \image qmldesigner-borderimage-bindings.png "Active state when condition"
+        \li Select the text item in \uicontrol Navigator to specify that the
+            text size is scaled up when the button is pressed down.
+        \li In \uicontrol Properties, select the \uicontrol Advanced tab, and
+            increase the value of the \uicontrol Scale property.
+        \li Select \e inactiveButton in \uicontrol Navigator to hide
+            it in the \e active state by changing the value of its
+            \uicontrol Visibility property in \uicontrol Properties.
+        \li Select \uicontrol State2.
+        \li Change the state name to \e inactive.
+        \li Set the when condition for the state to \c !mouseArea.pressed to
+            specify that the state is applied when the mouse button is not
+            pressed down.
+            \image qmldesigner-borderimage-bindings1.png "Inactive state when condition"
+            it in the \e inactive state by changing the value of its
+            \uicontrol Visibility property in \uicontrol Properties.
+        \li Press \key {Ctrl+S} to save the button.
+        \li Select the \inlineimage live_preview.png
+            (\uicontrol {Show Live Preview}) button to check how the
+            button behaves when you click it. You can drag the preview
+            window borders to see what happens when you resize the
+            component.
+    \endlist
+
+    To be useful, the button type has to be created in a project.
+    When you work on other QML files in the project to create screens
+    or other components for the UI, the button type appears in the
+    \uicontrol {My QML Components} tab of the \uicontrol Library view.
+    You can drag and drop it to \uicontrol {Form Editor} or
+    \uicontrol Navigator to create button instances and modify the values
+    of their properties to assign them useful IDs, change their appearance,
+    and set the button text for each button instance, for example.
+
+    For more information about positioning buttons on screens, see
+    \l{Positioning Items in UIs}.
+
+    \image qmldesigner-borderimage.png "Button preview as part of a screen"
+*/

@@ -1,0 +1,116 @@
+/****************************************************************************
+**
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of Qt Creator.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3 as published by the Free Software
+** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
+** included in the packaging of this file. Please review the following
+** information to ensure the GNU General Public License requirements will
+** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+**
+****************************************************************************/
+
+#pragma once
+
+#include "cpptools_global.h"
+
+#include "cppprojectfile.h"
+
+#include <projectexplorer/buildtargettype.h>
+#include <projectexplorer/headerpath.h>
+#include <projectexplorer/projectmacro.h>
+#include <projectexplorer/rawprojectpart.h>
+
+#include <cplusplus/Token.h>
+
+#include <utils/cpplanguage_details.h>
+#include <utils/fileutils.h>
+#include <utils/id.h>
+
+#include <QString>
+#include <QSharedPointer>
+
+namespace ProjectExplorer {
+class Project;
+}
+
+namespace CppTools {
+
+class CPPTOOLS_EXPORT ProjectPart
+{
+public:
+    enum ToolChainWordWidth {
+        WordWidth32Bit,
+        WordWidth64Bit,
+    };
+
+    using Ptr = QSharedPointer<ProjectPart>;
+
+public:
+    QString id() const;
+    QString projectFileLocation() const;
+
+    Ptr copy() const;
+    void updateLanguageFeatures();
+
+    static QByteArray readProjectConfigFile(const Ptr &projectPart);
+
+public:
+    ProjectExplorer::Project *project = nullptr;
+
+    QString displayName;
+
+    QString projectFile;
+    int projectFileLine = -1;
+    int projectFileColumn = -1;
+    QString callGroupId;
+
+    // Versions, features and extensions
+    ::Utils::Language language = ::Utils::Language::Cxx;
+    ::Utils::LanguageVersion languageVersion = ::Utils::LanguageVersion::LatestCxx;
+    ::Utils::LanguageExtensions languageExtensions = ::Utils::LanguageExtension::None;
+    CPlusPlus::LanguageFeatures languageFeatures;
+    ::Utils::QtVersion qtVersion = ::Utils::QtVersion::Unknown;
+
+    // Files
+    ProjectFiles files;
+    QStringList precompiledHeaders;
+    ProjectExplorer::HeaderPaths headerPaths;
+    QString projectConfigFile; // Generic Project Manager only
+
+    // Macros
+    ProjectExplorer::Macros projectMacros;
+    ProjectExplorer::Macros toolChainMacros;
+
+    // Build system
+    QString buildSystemTarget;
+    ProjectExplorer::BuildTargetType buildTargetType = ProjectExplorer::BuildTargetType::Unknown;
+    bool selectedForBuilding = true;
+
+    // ToolChain
+    Utils::Id toolchainType;
+    bool isMsvc2015Toolchain = false;
+    QString toolChainTargetTriple;
+    ToolChainWordWidth toolChainWordWidth = WordWidth32Bit;
+    ::Utils::FilePath toolChainInstallDir;
+    ::Utils::WarningFlags warningFlags = ::Utils::WarningFlags::Default;
+
+    // Misc
+    QStringList extraCodeModelFlags;
+    QStringList compilerFlags;
+};
+
+} // namespace CppTools

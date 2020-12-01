@@ -1,0 +1,135 @@
+/****************************************************************************
+**
+** Copyright (C) 2020 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the Qt Creator documentation.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+**
+****************************************************************************/
+
+/*!
+    \previouspage quick-signals.html
+    \page quick-dynamic-properties.html
+    \nextpage quick-property-bindings.html
+
+    \title Specifying Dynamic Properties
+
+    Each predefined QML type has a set of predefined properties that you can
+    specify values for. You can add custom properties that would not otherwise
+    exist for a particular type. You bind the properties to dynamic expressions
+    to define global properties for an object that can be read by other objects.
+    For example, you can specify global properties for the root object that you
+    can use in the child objects.
+
+    For example, to specify spacing between UI elements, you could define a
+    margin for an object of a QML type that does not have a margin property,
+    and then use bindings to refer to the value of the margin property from
+    other objects.
+
+    Similarly, you can add custom properties for your own QML types that are
+    based on the predefined types.
+
+    You can add properties for objects in the \uicontrol Connections view,
+    \uicontrol Properties tab.
+
+    \image qmldesigner-dynamicprops.png "Custom properties in Connection View Custom Properties tab"
+
+    To add properties for an object:
+
+    \list 1
+        \li Select \uicontrol View > \uicontrol Views >
+            \uicontrol {Connections View} > \uicontrol {Properties}.
+        \li Select the \inlineimage plus.png
+            (\uicontrol Add) button to add a dynamic property for the currently
+            selected item. The item ID is displayed in the \uicontrol Item
+            column.
+        \li Double-click the value in the \uicontrol Property column to give a
+            name to the property.
+        \li Double-click the value in the \uicontrol {Property Type} column to
+            specify the \l{Supported Property Types}{type of the property}.
+        \li Double-click the value in the \uicontrol {Property Value} column
+            to specify the value of the property.
+    \endlist
+
+    Right-click a property and select \uicontrol {Open Binding Editor} in
+    the context menu to bind the value of the property to that of another one
+    or to data accessible in the application in \uicontrol {Binding Editor}.
+    For more information, see \l{Setting Bindings}.
+
+    \image qmldesigner-binding-editor.png "Binding Editor"
+
+    The properties you add for a QML type are displayed in the
+    \uicontrol Properties view when you select a component of
+    that type in \uicontrol Navigator or \uicontrol {Form Editor}.
+
+    \image qtquick-custom-properties.png "Custom properties in Properties view"
+
+    For more information about setting property values in the
+    \uicontrol Properties view, see \l{Specifying Item Properties}.
+
+    For an example of using custom properties in an application, see
+    \l{Creating a Mobile Application}.
+
+    \section1 Supported Property Types
+
+    The following table describes the supported property types:
+
+    \table
+    \header
+        \li Type
+        \li Description
+    \row
+        \li alias
+        \li \l{Property Aliases}{Property alias} that holds a reference to
+            another property
+    \row
+        \li bool
+        \li Binary \c true or \c false value
+    \row
+        \li color
+        \li Color value that can be specified by using an SVG color name, such
+            as "red", "green", or "lightsteelblue", or a hexadecimal triplet or
+            quad in the form "#RRGGBB" and "#AARRGGBB", respectively. For
+            example, the color red corresponds to a triplet of "#FF0000" and
+            a slightly transparent blue to a quad of "#800000FF".
+            In addition, you can use the following Qt functions: \l{Qt::rgba()}
+            {Qt.rgba()}, \l{Qt::hsva()}{Qt.hsva()}, \l{Qt::hsla()}{Qt.hsla()},
+            \l{Qt::darker()}{Qt.darker()}, \l{Qt::lighter()}{Qt.lighter()}, and
+            \l{Qt::tint()}{Qt.tint()}.
+    \row
+        \li int
+        \li Whole integer number, such as 0, 10, or -20
+    \row
+        \li real
+        \li Number with a decimal point
+    \row
+        \li string
+        \li Free form text string
+    \row
+        \li url
+        \li Resource locator, such as a file name. It can be either  absolute,
+            (\c http://qt-project.org), or relative  (\c pics/logo.png). A
+            relative URL is resolved relative to the URL of the parent
+            component.
+    \row
+        \li variant
+        \li Generic property type. For example, variant properties can store
+            numbers, strings, objects, arrays, and functions.
+    \endtable
+*/

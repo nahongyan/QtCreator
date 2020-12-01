@@ -1,0 +1,95 @@
+/****************************************************************************
+**
+** Copyright (C) 2020 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \externalpage https://doc.qt.io/QtForMCUs/qtul-supported-platforms.html
+    \title Qt for MCUs - Supported Target Platforms
+*/
+/*!
+    \externalpage https://doc.qt.io/QtForMCUs/qtul-getting-started-renesas.html
+    \title Getting Started on Renesas
+*/
+/*!
+    \externalpage https://doc.qt.io/QtForMCUs/qtul-getting-started-on-stm.html
+    \title Getting Started on STM
+*/
+/*!
+    \externalpage https://doc.qt.io/QtForMCUs/qtul-getting-started-on-nxp.html
+    \title Getting Started on NXP
+*/
+/*!
+    \externalpage https://doc.qt.io/QtForMCUs/qtul-getting-started-windows.html
+    \title Getting Started on Windows
+*/
+/*!
+    \externalpage https://adoptopenjdk.net/
+    \title AdoptOpenJDK
+*/
+/*!
+    \externalpage http://openjdk.java.net
+    \title OpenJDK
+*/
+/*!
+    \externalpage http://developer.android.com/sdk/index.html
+    \title Android SDK Command-line Tools
+*/
+/*!
+    \externalpage https://developer.android.com/studio/command-line/avdmanager.html
+    \title avdmanager
+*/
+/*!
+    \externalpage http://developer.android.com/tools/sdk/ndk/index.html
+    \title Android NDK
+*/
+/*!
+    \externalpage https://developer.android.com/studio/debug/dev-options
+    \title Configure on-device developer options
+*/
+/*!
+    \externalpage https://developer.android.com/studio/command-line/sdkmanager.html
+    \title sdkmanager
+*/
+/*!
+    \externalpage https://code.qt.io/cgit/qt-creator/qt-creator.git/plain/share/qtcreator/android/sdk_definitions.json
+    \title sdk_definitions.json
+*/
+/*!
+    \externalpage https://developer.android.com/studio/run/emulator-commandline
+    \title Start the emulator from the command line
+*/
+/*!
+    \externalpage https://marketplace.qt.io/products/android-openssl-support
+    \title Android OpenSSL support
+*/
+/*!
+    \externalpage http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels
+    \title What is API Level?
+*/
+/*!
+    \externalpage http://developer.android.com/guide/components/fundamentals.html
+    \title Android Application Fundamentals
+*/

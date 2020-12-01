@@ -1,0 +1,118 @@
+/****************************************************************************
+**
+** Copyright (C) 2016 Openismus GmbH.
+** Author: Peter Penz (ppenz@openismus.com)
+** Author: Patricia Santana Cruz (patriciasantanacruz@gmail.com)
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of Qt Creator.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3 as published by the Free Software
+** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
+** included in the packaging of this file. Please review the following
+** information to ensure the GNU General Public License requirements will
+** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+**
+****************************************************************************/
+
+#include "makefileparserthread.h"
+
+#include <QMutexLocker>
+
+using namespace AutotoolsProjectManager::Internal;
+
+MakefileParserThread::MakefileParserThread(ProjectExplorer::BuildSystem *bs)
+    : m_parser(bs->projectFilePath().toString()),
+      m_guard(bs->guardParsingRun())
+{
+    connect(&m_parser, &MakefileParser::status,
+            this, &MakefileParserThread::status);
+}
+
+QStringList MakefileParserThread::sources() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_sources;
+}
+
+QStringList MakefileParserThread::makefiles() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_makefiles;
+}
+
+QString MakefileParserThread::executable() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_executable;
+}
+
+QStringList MakefileParserThread::includePaths() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_includePaths;
+}
+
+ProjectExplorer::Macros MakefileParserThread::macros() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_macros;
+}
+
+QStringList MakefileParserThread::cflags() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_cflags;
+}
+
+QStringList MakefileParserThread::cxxflags() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_cxxflags;
+}
+
+bool MakefileParserThread::hasError() const
+{
+    QMutexLocker locker(&m_mutex);
+    return !m_guard.isSuccess();
+}
+
+bool MakefileParserThread::isCanceled() const
+{
+    // MakefileParser::isCanceled() is thread-safe
+    return m_parser.isCanceled();
+}
+
+void MakefileParserThread::cancel()
+{
+    m_parser.cancel();
+}
+
+void MakefileParserThread::run()
+{
+    const bool success = m_parser.parse();
+
+    // Important: Start locking the mutex _after_ the parsing has been finished, as
+    // this prevents long locks if the caller reads a value before the signal
+    // finished() has been emitted.
+    QMutexLocker locker(&m_mutex);
+    if (success)
+        m_guard.markAsSuccess();
+    m_executable = m_parser.executable();
+    m_sources = m_parser.sources();
+    m_makefiles = m_parser.makefiles();
+    m_includePaths = m_parser.includePaths();
+    m_macros = m_parser.macros();
+    m_cflags = m_parser.cflags();
+    m_cxxflags = m_parser.cxxflags();
+}

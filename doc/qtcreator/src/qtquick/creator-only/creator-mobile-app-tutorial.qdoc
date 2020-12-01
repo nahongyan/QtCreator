@@ -1,0 +1,298 @@
+/****************************************************************************
+**
+** Copyright (C) 2020 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the Qt Creator documentation.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+**
+****************************************************************************/
+
+// **********************************************************************
+// NOTE: the sections are not ordered by their logical order to avoid
+// reshuffling the file each time the index order changes (i.e., often).
+// Run the fixnavi.pl script to adjust the links to the index order.
+// **********************************************************************
+
+/*!
+    \previouspage creator-writing-program.html
+    \example accelbubble
+    \nextpage creator-project-managing.html
+
+    \title Creating a Mobile Application
+
+    This tutorial describes developing Qt Quick applications for Android and iOS
+    devices using Qt Quick Controls.
+    We use \QC to implement a Qt Quick application
+    that accelerates an SVG (Scalable Vector Graphics) image based on the
+    changing accelerometer values.
+
+    \image creator_android_tutorial_ex_app.png
+
+    For more information about the UI choices you have, see \l{User Interfaces}.
+
+    \section1 Setting up the Development Environment
+
+    To be able to build the application for and run it on a mobile device, you must
+    set up the development environment for the device platform and configure a
+    connection between \QC and the mobile device.
+
+    To develop for Android devices, you must install \l{Qt for Android}
+    and set up the development environment, as instructed in
+    \l{Connecting Android Devices}.
+
+    To develop for iOS devices, you must install Xcode and use it to configure
+    a device. For this, you need an Apple developer account and iOS Developer
+    Program certificate that you receive from Apple. For more information, see
+    \l{Connecting iOS Devices}.
+
+    \include qtquick-tutorial-create-empty-project.qdocinc qtquick empty application
+
+    \section1 Creating the Accelbubble Main View
+
+    The main view of the application displays an SVG bubble image that moves
+    around the screen when you tilt the device.
+
+    We use \e {Bluebubble.svg} in this tutorial, but you can  use any other
+    image or a QML type, instead.
+
+    To create the UI in the Design mode:
+
+    \list 1
+
+        \li Open the \e main.qml in the Design mode.
+
+        \li In the \uicontrol Navigator, select \uicontrol Label and press
+            \key Delete to delete it.
+
+        \li In \uicontrol Library > \uicontrol {QML Types}, select
+            \uicontrol Rectangle and drag and drop it to  \e Window
+            in \uicontrol Navigator.
+
+        \li Select the rectangle in \uicontrol Navigator to edit its properties:
+
+            \image qtquick-mobile-app-tutorial-main-view.png "Rectangle in different views"
+
+            \list a
+
+                \li In the \uicontrol Id field enter \e mainWindow, to be able
+                    to reference the rectangle from other places.
+
+                \li Select the \uicontrol Layout tab, and then click
+                    the \inlineimage anchor-fill.png
+                    (\uicontrol {Fill to Parent}) button to anchor the rectangle
+                    to the item.
+
+            \endlist
+
+                \li Select \uicontrol Library > \uicontrol Assets >
+                    \uicontrol {Add New Assets} to locate Bluebubble.svg
+                    (or your own image) and add it to the project folder.
+                \li Drag and drop the image from \uicontrol Assets to
+                    \e mainWindow in \uicontrol Navigator.
+
+        \li In the \uicontrol Properties view, \uicontrol Id field, enter
+            \e bubble to be able to reference the image from other places.
+
+            \image qtquick-mobile-app-tutorial-image.png "Image file in different views"
+
+        \li Select the \inlineimage export_unchecked.png
+            (\uicontrol Export) button in \uicontrol Navigator to export
+            \e mainWindow and \e bubble as properties.
+
+    \endlist
+
+    We want to modify the properties of the bubble in ways that are not
+    supported in the Design mode, and therefore we create a custom QML
+    type for it:
+
+    \list 1
+
+        \li Right-click the image and select
+            \uicontrol {Move Component into Separate File}.
+
+            \image qtcreator-move-component-into-separate-file.png
+
+        \li In the \uicontrol {Component name} field, enter \e Bubble.
+
+        \li Deselect the \uicontrol x and \uicontrol y check boxes,
+            because we want to use the accelerometer to determine
+            the location of the bubble on the screen.
+
+        \li Select \uicontrol OK to create \e Bubble.qml.
+
+    \endlist
+
+    \QC creates a reference to the Bubble type in \e main.qml.
+
+    To check your code, you can compare your \e main.qml and
+    \e {Bubble.qml} with the corresponding example files.
+
+    The UI is now ready and you can add the necessary properties for
+    making the bubble move.
+
+    \section1 Moving the Bubble
+
+    We add custom properties to position the image in respect to the width
+    and height of the main window.
+
+    \list 1
+        \li Open \e Bubble.qml in Design mode.
+        \li In \uicontrol {Connections View}, \uicontrol Properties tab,
+            select click the \inlineimage plus.png
+            button to add a custom property for the Bubble type.
+            \image qtquick-mobile-app-tutorial-custom-properties.png "Connection View Properties tab"
+        \li Double-click the value in the \uicontrol Property column, and enter
+            \e centerY as the name of the property.
+        \li Double-click the value in the \uicontrol {Property Type} column,
+            and select \e real as the type of the property. You will specify
+            the property value later in \uicontrol Properties.
+        \li Add two more properties of the same type with the names \e centerY
+            and \e bubbleCenter.
+        \li Open \e main.qml in Design mode.
+        \li Select \e bubble in \uicontrol Navigator to specify values for the
+            custom properties in \uicontrol Properties.
+        \li In the \uicontrol X field, select \inlineimage icons/action-icon.png
+            , and then select \uicontrol {Set Binding} to open
+            \uicontrol {Binding Editor}.
+            \image qtquick-mobile-app-tutorial-binding-editor1.png "Setting binding for X in Binding Editor"
+        \li Enter the following value to center the bubble horizontally in the
+            main window when the application starts:
+            \c{bubble.centerX - bubbleCenter}.
+        \li Select \uicontrol OK to close the binding editor and save the
+            binding.
+        \li In the \uicontrol X field, set the following binding to center the
+            bubble vertically: \c{bubble.centerY - bubbleCenter}.
+        \li In the \uicontrol centerY field, enter the following value to bind
+            the y coordinate of the bubble center to half the height of the main
+            window: \c {mainWindow.height /2}.
+            \image qtquick-mobile-app-tutorial-binding-editor.png "Setting binding for centerX"
+        \li In the \uicontrol centerX field, bind the x coordinate of
+            the bubble center to half the width of the main window:
+            \c {mainWindow.width /2}.
+        \li In the \uicontrol bubbleCenter field, bind the center of
+            the bubble to half of its width: \c {bubble.width /2}.
+    \endlist
+
+    We now want to add code to move the bubble based on Accelerometer sensor
+    values. This is not supported by \uicontrol {Form Editor}, so we will do
+    it in \uicontrol {Text Editor}:
+
+    \list 1
+        \li Add the following import statement to \e main.qml:
+
+            \quotefromfile accelbubble/main.qml
+            \skipto QtSensors
+            \printline QtSensors
+
+        \li Add the \l{Accelerometer} type with the necessary properties:
+
+            \skipto Accelerometer
+            \printuntil radians_to_degrees
+            \skipto }
+            \printuntil }
+
+        \li Add the following JavaScript functions that calculate the
+            x and y position of the bubble based on the current Accelerometer
+            values:
+
+            \quotefromfile accelbubble/main.qml
+            \skipto function
+            \printuntil Math.atan2(x
+            \printuntil }
+
+        \li Add the following JavaScript code for \c onReadingChanged signal of
+            Accelerometer type to make the bubble move when the Accelerometer
+            values change:
+
+            \quotefromfile accelbubble/main.qml
+            \skipto onReadingChanged
+            \printuntil }
+
+            We want to ensure that the position of the bubble is always
+            within the bounds of the screen. If the Accelerometer returns
+            \e {not a number} (NaN), the value is ignored and the bubble
+            position is not updated.
+        \li Add \l SmoothedAnimation behavior on the \c x and \c y properties of
+            the bubble to make its movement look smoother.
+
+            \quotefromfile accelbubble/main.qml
+            \skipto Behavior
+            \printuntil x
+            \printuntil }
+            \printuntil }
+     \endlist
+
+     \section1 Locking Device Orientation
+
+     The device display is rotated by default when the device orientation
+     changes between portrait and landscape. For this example, it would be
+     better for the screen orientation to be fixed.
+
+    To lock the orientation to portrait or landscape on Android, specify it in
+    an AndroidManifest.xml that you can generate in \QC. For more information,
+    see \l{Editing Manifest Files}.
+
+    On iOS, you can lock the device orientation in a Info.plist file that you
+    specify in the .pro file as the value of the QMAKE_INFO_PLIST variable.
+
+    \section1 Adding Dependencies
+
+    Update the accelbubble.pro file with the following library dependency
+    information:
+
+    \code
+    QT += quick sensors svg xml
+    \endcode
+
+    On iOS, you must link to the above libraries statically, by adding the
+    plugin names explicitly as values of the QTPLUGIN variable. Specify a
+    qmake scope for iOS builds (which can also contain the QMAKE_INFO_PLIST
+    variable):
+
+    \code
+    ios {
+    QTPLUGIN += qsvg qsvgicon qtsensors_ios
+    QMAKE_INFO_PLIST = Info.plist
+    }
+    \endcode
+
+    After adding the dependencies, select \uicontrol Build > \uicontrol {Run qmake} to apply
+    the changes to the Makefile of the project.
+
+    \section1 Running the Application
+
+    The application is complete and ready to be deployed to a device:
+
+    \list 1
+
+        \li Enable \e{USB Debugging} on the Android device or \e{developer mode}
+            on the iOS device.
+
+        \li Connect the device to the development PC.
+
+    If you are using a device running Android v4.2.2, it should prompt you to
+    verify the connection to allow USB debugging from the PC it is connected
+    to. To avoid such prompts every time you connect the device, select the
+    \uicontrol {Always allow from the computer} check box, and then select
+    \uicontrol OK.
+
+        \li To run the application on the device, press \key {Ctrl+R}.
+
+    \endlist
+*/

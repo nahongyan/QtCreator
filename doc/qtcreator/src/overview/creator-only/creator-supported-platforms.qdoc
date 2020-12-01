@@ -1,0 +1,106 @@
+/****************************************************************************
+**
+** Copyright (C) 2020 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the Qt Creator documentation.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+**
+****************************************************************************/
+
+/*!
+    \previouspage creator-advanced.html
+    \page creator-os-supported-platforms.html
+    \nextpage creator-desktop-platforms.html
+
+    \title Supported Platforms
+
+    You can install and run \QC on several operating systems to create
+    applications for multiple desktop, embedded, and mobile device platforms,
+    as well as web browsers (experimental).
+
+    The following table summarizes operating system support for developing
+    applications.
+
+    \table
+        \header
+            \li {1,2} Target Platform
+            \li {3,1} Development Platform
+        \header
+            \li \l Linux
+            \li \l macOS
+            \li \l Windows
+        \row
+            \li \l Android
+            \li \image ok
+            \li \image ok
+            \li \image ok
+        \row
+            \li \l{Bare Metal}
+            \li \image ok
+            \li \image ok
+            \li \image ok
+        \row
+            \li \l Boot2Qt
+            \li \image ok
+            \li \image ok
+            \li \image ok
+        \row
+            \li \l{Generic Remote Linux}
+            \li \image ok
+            \li \image ok
+            \li \image ok
+        \row
+            \li \l iOS
+            \li
+            \li \image ok
+            \li
+        \row
+            \li \l{Microcontroller Units (MCU)}{MCUs}
+            \li
+            \li
+            \li \image ok
+        \row
+            \li \l QNX
+            \li \image ok
+            \li \image ok
+            \li \inlineimage ok
+        \row
+            \li \l{Universal Windows Platform (UWP)}{UWP}
+            \li
+            \li
+            \li \image ok
+        \row
+            \li \l{Building Applications for the Web}{WebAssembly}
+            \li \image ok
+            \li \image ok
+            \li \image ok
+    \endtable
+
+    \QC automatically runs scheduled checks for updates based on the settings
+    specified in \uicontrol Tools > \uicontrol Options \uicontrol Environment >
+    \uicontrol Update.
+
+    For more information on the requirements for each platform, see:
+
+    \list
+        \li \l {Desktop Platforms}
+        \li \l {Embedded Platforms}
+        \li \l {Mobile Platforms}
+    \endlist
+*/
